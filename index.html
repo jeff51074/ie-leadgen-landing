@@ -1631,10 +1631,121 @@
   /* ============ SCROLL REVEALS ============ */
   .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.2,0.8,0.2,1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ============ LANGUAGE TOGGLE (floating top-right) ============ */
+  .lang-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: inline-flex;
+    background: rgba(10, 30, 41, 0.75);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    padding: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.04) inset;
+    transition: all 0.3s ease;
+  }
+  .lang-switch:hover {
+    border-color: rgba(242, 106, 46, 0.4);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(242,106,46,0.15);
+  }
+  .lang-btn {
+    background: transparent;
+    border: 0;
+    color: var(--ie-gray-300);
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    padding: 8px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+    line-height: 1;
+    min-width: 44px;
+  }
+  .lang-btn:hover { color: var(--ie-white); }
+  .lang-btn.active {
+    background: var(--ie-orange-500);
+    color: var(--ie-white);
+    box-shadow: 0 2px 6px rgba(242,106,46,0.4);
+  }
+  @media (max-width: 600px) {
+    .lang-switch { top: 14px; right: 14px; padding: 3px; }
+    .lang-btn { padding: 7px 11px; font-size: 10px; min-width: 38px; }
+  }
+
+  /* ============ EN-MODE TYPOGRAPHY (refined Inter scale) ============ */
+  html[data-lang="en"] body { font-family: var(--font-en); }
+  html[data-lang="en"] h1 {
+    font-family: var(--font-en);
+    font-size: clamp(36px, 6.6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 900;
+  }
+  html[data-lang="en"] .section-title {
+    font-family: var(--font-en);
+    font-size: clamp(26px, 3.7vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  html[data-lang="en"] .hero-sub {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 600px;
+  }
+  html[data-lang="en"] .section-sub {
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 600px;
+  }
+  html[data-lang="en"] .jeff-note h3 {
+    font-family: var(--font-en);
+    letter-spacing: -0.015em;
+    font-size: 22px;
+  }
+  html[data-lang="en"] .jeff-note p { font-size: 14.5px; line-height: 1.7; }
+  html[data-lang="en"] .quote-text {
+    font-family: var(--font-en);
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+  html[data-lang="en"] .podcast-feature h3 {
+    font-family: var(--font-en);
+    letter-spacing: -0.015em;
+  }
+  html[data-lang="en"] .form-header h3 {
+    font-family: var(--font-en);
+    letter-spacing: -0.015em;
+  }
+  html[data-lang="en"] button[type="submit"] {
+    font-family: var(--font-en);
+    letter-spacing: 0.02em;
+  }
+  html[data-lang="en"] .faq-item summary {
+    font-family: var(--font-en);
+    letter-spacing: -0.005em;
+  }
+  html[data-lang="en"] .faq-item .ans { font-family: var(--font-en); font-size: 14px; }
+  html[data-lang="en"] .fit-card li { font-family: var(--font-en); }
+  html[data-lang="en"] .wyg-text { font-family: var(--font-en); font-size: 14.5px; }
+  html[data-lang="en"] #success h2 { font-family: var(--font-en); letter-spacing: -0.02em; }
 </style>
 </head>
 <body>
 <div class="deco-bg">ATTENTION</div>
+
+<!-- LANGUAGE TOGGLE (floating top-right) -->
+<div class="lang-switch" role="group" aria-label="Language switcher">
+  <button class="lang-btn active" data-lang="zh" type="button" aria-label="切换中文">中文</button>
+  <button class="lang-btn" data-lang="en" type="button" aria-label="Switch to English">EN</button>
+</div>
 
 <div class="wrap">
 
@@ -1644,17 +1755,17 @@
       <span class="dot"></span>
       INFLUENCE ENGINE
     </div>
-    <div class="nav-meta">A Book Gift · By Jeff Leong</div>
+    <div class="nav-meta" data-en="A Book Gift · By Jeff Leong">A Book Gift · By Jeff Leong</div>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <div class="kicker">POPULAR 已售完 · BookFest 已售完 · 我手上还有 30 本</div>
-    <h1>
+    <div class="kicker" data-en="POPULAR Sold Out · BookFest Sold Out · 30 left in my hands">POPULAR 已售完 · BookFest 已售完 · 我手上还有 30 本</div>
+    <h1 data-en="Can't <span class=&quot;yellow&quot;>buy it</span> in bookstores —<br/>I'll send it <em>free</em>.">
       书店<span class="yellow">买不到</span>，<br/>
       我<em>免费</em>寄给你。
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" data-en="<strong>《The Attention War》</strong> — <strong>sold out across POPULAR Malaysia</strong>, <span class=&quot;hl&quot;>Shopee Mall</span>, and <strong>BookFest live</strong>. Signed copies only live with me — 30 a month, mailed to founders I believe will actually finish it.">
       《注意力戰爭》—— <strong>POPULAR 全马门市售罄</strong>、<span class="hl">Shopee Mall 已售完</span>、<strong>BookFest 现场卖光</strong>。
       仅签名版还在我手里 —— 每月只寄 30 本给我觉得「会真正读完」的老板。
     </p>
@@ -1669,7 +1780,7 @@
         <div class="sold-out-stamp">
           <div class="sm">POPULAR</div>
           <div class="lg">SOLD OUT</div>
-          <div class="sm">已售完</div>
+          <div class="sm" data-en="Sold Out">已售完</div>
         </div>
         <div class="book-shadow"></div>
       </div>
@@ -1677,55 +1788,55 @@
 
     <!-- Features BELOW the book (not covering cover) -->
     <div class="book-features">
-      <span class="book-feature">✍️ Jeff 签名</span>
-      <span class="book-feature alt">📦 免运费寄到家</span>
-      <span class="book-feature">💌 个人化手写卡片</span>
+      <span class="book-feature" data-en="✍️ Signed by Jeff">✍️ Jeff 签名</span>
+      <span class="book-feature alt" data-en="📦 Free shipping">📦 免运费寄到家</span>
+      <span class="book-feature" data-en="💌 Personal handwritten card">💌 个人化手写卡片</span>
     </div>
 
     <div class="book-meta">
-      <span>《注意力戰爭》<span class="sep">·</span> Jeff Leong 著</span>
+      <span data-en="《The Attention War》<span class=&quot;sep&quot;>·</span> by Jeff Leong">《注意力戰爭》<span class="sep">·</span> Jeff Leong 著</span>
       <span class="dot-sep">●</span>
-      <span>180 页</span>
+      <span data-en="180 pages">180 页</span>
       <span class="dot-sep">●</span>
       <span>ISBN 978-629-474-093-8</span>
       <span class="dot-sep">●</span>
-      <span>2026 出版</span>
+      <span data-en="Published 2026">2026 出版</span>
     </div>
   </header>
 
   <!-- STATS -->
   <section class="stats reveal">
-    <div class="stat"><div class="num">1M+</div><div class="label">YouTube 订阅</div></div>
-    <div class="stat"><div class="num">1B+</div><div class="label">总观看</div></div>
-    <div class="stat"><div class="num">2×</div><div class="label">8-Fig 公司</div></div>
-    <div class="stat"><div class="num">100+</div><div class="label">辅导老板</div></div>
+    <div class="stat"><div class="num">1M+</div><div class="label" data-en="YouTube Subscribers">YouTube 订阅</div></div>
+    <div class="stat"><div class="num">1B+</div><div class="label" data-en="Total Views">总观看</div></div>
+    <div class="stat"><div class="num">2×</div><div class="label" data-en="8-Fig Companies">8-Fig 公司</div></div>
+    <div class="stat"><div class="num">100+</div><div class="label" data-en="Founders Coached">辅导老板</div></div>
   </section>
 
   <!-- SOLD OUT PROOF -->
   <section class="sold-out-section reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">FAST SELL-OUT · 火速售光</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="FAST SELL-OUT">FAST SELL-OUT · 火速售光</div>
     </div>
-    <h2 class="section-title">3 月新书 ， <em>多平台同步售罄</em></h2>
-    <p class="section-sub">出版不到两个月，<strong>POPULAR 全马门市</strong>、<strong>Shopee Mall</strong>、<strong>BookFest 现场</strong> 全数卖光。如果你还想拿到一本，剩下的渠道只有一个 —— 我手上的签名版。</p>
+    <h2 class="section-title" data-en="March release, <em>sold out across every platform</em>">3 月新书 ， <em>多平台同步售罄</em></h2>
+    <p class="section-sub" data-en="Less than two months after launch — <strong>POPULAR Malaysia retail</strong>, <strong>Shopee Mall</strong>, and <strong>BookFest live</strong> all cleared out. If you still want a copy, only one channel is left — signed copies in my hands.">出版不到两个月，<strong>POPULAR 全马门市</strong>、<strong>Shopee Mall</strong>、<strong>BookFest 现场</strong> 全数卖光。如果你还想拿到一本，剩下的渠道只有一个 —— 我手上的签名版。</p>
     <div class="sold-out-grid">
       <div class="platform-card">
         <div class="platform-name">POPULAR</div>
         <div class="platform-status">⛔ OUT OF PRINT / SOLD OUT</div>
-        <div class="platform-price">原价 <s>RM 69.00</s> · 会员价 <s>RM 62.10</s></div>
-        <div class="platform-note">POPULAR 全马门市 + Online 售罄。</div>
+        <div class="platform-price" data-en="Retail <s>RM 69.00</s> · Member <s>RM 62.10</s>">原价 <s>RM 69.00</s> · 会员价 <s>RM 62.10</s></div>
+        <div class="platform-note" data-en="POPULAR Malaysia retail + Online — sold out.">POPULAR 全马门市 + Online 售罄。</div>
       </div>
       <div class="platform-card">
         <div class="platform-name">SHOPEE MALL</div>
-        <div class="platform-status">⛔ 已售完</div>
-        <div class="platform-price">特价 <s>RM 56.00</s> · 评分 5.0 ★</div>
-        <div class="platform-note">3 月新书上架，电商优惠券版本也已下架。</div>
+        <div class="platform-status" data-en="⛔ Sold Out">⛔ 已售完</div>
+        <div class="platform-price" data-en="Sale <s>RM 56.00</s> · Rating 5.0 ★">特价 <s>RM 56.00</s> · 评分 5.0 ★</div>
+        <div class="platform-note" data-en="March release; the e-commerce voucher edition has also been delisted.">3 月新书上架，电商优惠券版本也已下架。</div>
       </div>
       <div class="platform-card">
         <div class="platform-name">BookFest 2026</div>
-        <div class="platform-status">⛔ 现场抢光</div>
-        <div class="platform-price">数百人到场 · 签售排队</div>
-        <div class="platform-note">2026 年 3 月 BookFest @ Malaysia 新书分享会，现场库存当天清空。</div>
+        <div class="platform-status" data-en="⛔ Cleared On Day One">⛔ 现场抢光</div>
+        <div class="platform-price" data-en="Hundreds attending · Signing queue">数百人到场 · 签售排队</div>
+        <div class="platform-note" data-en="March 2026 BookFest @ Malaysia book launch — live stock cleared on day one.">2026 年 3 月 BookFest @ Malaysia 新书分享会，现场库存当天清空。</div>
       </div>
     </div>
 
@@ -1733,15 +1844,15 @@
     <div class="bookfest-gallery">
       <div class="bookfest-photo">
         <img src="assets/bookfest-stage.jpg" alt="BookFest stage" />
-        <div class="caption">BookFest 2026 · 新书分享会现场</div>
+        <div class="caption" data-en="BookFest 2026 · Book launch event">BookFest 2026 · 新书分享会现场</div>
       </div>
       <div class="bookfest-photo">
         <img src="assets/bookfest-signing.jpg" alt="POPULAR 签售" />
-        <div class="caption">POPULAR · 上架签售</div>
+        <div class="caption" data-en="POPULAR · Launch signing">POPULAR · 上架签售</div>
       </div>
       <div class="bookfest-photo">
         <img src="assets/bookfest-crowd.jpg" alt="数百人到场" />
-        <div class="caption">数百人到场 · 现场满座</div>
+        <div class="caption" data-en="Hundreds attending · Full house">数百人到场 · 现场满座</div>
       </div>
     </div>
   </section>
@@ -1749,19 +1860,19 @@
   <!-- MEDIA — expanded with real article links -->
   <section class="media-section reveal">
     <div class="media-section-header">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">AS FEATURED IN · 媒体报道</div>
-      <h2 class="section-title" style="margin-top: 8px;">从马来西亚到<em>国际媒体</em></h2>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="AS FEATURED IN">AS FEATURED IN · 媒体报道</div>
+      <h2 class="section-title" style="margin-top: 8px;" data-en="From Malaysia to <em>international press</em>">从马来西亚到<em>国际媒体</em></h2>
     </div>
 
     <!-- Group 1: 新书发布 (2026 March) -->
     <div class="media-group" style="margin-top: 48px;">
-      <div class="media-group-title">📰 新书发布 · 2026 年 3 月 同日多家媒体报道</div>
+      <div class="media-group-title" data-en="📰 Book Launch · March 2026 — same-day coverage across major outlets">📰 新书发布 · 2026 年 3 月 同日多家媒体报道</div>
       <div class="media-list">
         <a class="media-link" href="https://www.orientaldaily.com.my/news/entertainment/2026/03/22/805811" target="_blank" rel="noopener">
           <div class="thumb"><img src="assets/articles/oriental.jpeg" alt="Oriental Daily article preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
-            <span class="outlet">东方日报 · Oriental Daily</span>
-            <span class="headline">Jeff 回归自我 砸"一辆 MyVi"重金出书跨界当作家</span>
+            <span class="outlet" data-en="Oriental Daily">东方日报 · Oriental Daily</span>
+            <span class="headline" data-en="Jeff goes back to himself — invests &quot;a MyVi&quot; worth in publishing his crossover debut as author">Jeff 回归自我 砸"一辆 MyVi"重金出书跨界当作家</span>
             <div class="meta-row">
               <span class="date">2026 / 03 / 22</span>
               <span class="read-more">Read</span>
@@ -1772,7 +1883,7 @@
           <div class="thumb"><img src="assets/articles/truthmedia.jpg" alt="Truth Media article preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
             <span class="outlet">Truth Media</span>
-            <span class="headline">YouTuber Jeff Leong 跨界推出著作《注意力战争》</span>
+            <span class="headline" data-en="YouTuber Jeff Leong releases《The Attention War》">YouTuber Jeff Leong 跨界推出著作《注意力战争》</span>
             <div class="meta-row">
               <span class="date">2026 / 03 / 24</span>
               <span class="read-more">Read</span>
@@ -1783,9 +1894,9 @@
           <div class="thumb"><img src="assets/articles/tclmag.jpg" alt="TCL Magazine preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
             <span class="outlet">TCL Magazine</span>
-            <span class="headline">杰出青年企业家深度专访</span>
+            <span class="headline" data-en="Outstanding young entrepreneur · in-depth interview">杰出青年企业家深度专访</span>
             <div class="meta-row">
-              <span class="date">人物专题</span>
+              <span class="date" data-en="Profile feature">人物专题</span>
               <span class="read-more">Read</span>
             </div>
           </div>
@@ -1795,29 +1906,29 @@
 
     <!-- Combined: 部分媒体报道 -->
     <div class="media-group">
-      <div class="media-group-title">📌 部分媒体报道 · Selected Coverage</div>
+      <div class="media-group-title" data-en="📌 Selected Coverage">📌 部分媒体报道 · Selected Coverage</div>
       <div class="media-list">
         <a class="media-link" href="https://www.chinapress.com.my/20200321/jeff-inthira%E9%A2%91%E9%81%93-youtube%E7%A0%B4%E7%99%BE%E4%B8%87%E8%AE%A2%E9%98%85/" target="_blank" rel="noopener">
           <div class="thumb"><img src="assets/articles/chinapress2020.jpg" alt="China Press article preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
-            <span class="outlet">中国报 · 头条</span>
-            <span class="headline">Jeff &amp; Inthira 频道 YouTube 破百万订阅</span>
+            <span class="outlet" data-en="China Press · Headline">中国报 · 头条</span>
+            <span class="headline" data-en="Jeff &amp; Inthira channel crosses 1M YouTube subscribers">Jeff &amp; Inthira 频道 YouTube 破百万订阅</span>
             <div class="meta-row"><span class="date">2020 / 03 / 21</span><span class="read-more">Read</span></div>
           </div>
         </a>
         <a class="media-link" href="https://ttshow.tw/news/57143/" target="_blank" rel="noopener">
           <div class="thumb"><img src="assets/articles/ttshow_57143.jpg" alt="ttshow.tw 台湾 article preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
-            <span class="outlet">ttshow.tw · 台湾</span>
-            <span class="headline">两千万副业工厂揭秘</span>
-            <div class="meta-row"><span class="date">深度专访</span><span class="read-more">Read</span></div>
+            <span class="outlet" data-en="ttshow.tw · Taiwan">ttshow.tw · 台湾</span>
+            <span class="headline" data-en="Inside the RM 20M side-business factory">两千万副业工厂揭秘</span>
+            <div class="meta-row"><span class="date" data-en="In-depth feature">深度专访</span><span class="read-more">Read</span></div>
           </div>
         </a>
 <a class="media-link" href="https://theinterview.asia/info/11865/" target="_blank" rel="noopener">
           <div class="thumb"><img src="assets/articles/webtv.jpg" alt="Weibo × WebTvAsia coverage preview" loading="lazy"/><div class="thumb-overlay"></div></div>
           <div class="body">
-            <span class="outlet">中国微博 × WebTvAsia</span>
-            <span class="headline">"进军中国市场的优质内容创作者" · 创作者研讨会</span>
+            <span class="outlet" data-en="China Weibo × WebTvAsia">中国微博 × WebTvAsia</span>
+            <span class="headline" data-en="&quot;Quality creator breaking into China&quot; · creators summit">"进军中国市场的优质内容创作者" · 创作者研讨会</span>
             <div class="meta-row"><span class="date">2019</span><span class="read-more">Read</span></div>
           </div>
         </a>
@@ -1826,7 +1937,7 @@
 
     <!-- Group 4: 数据库 + Wiki -->
     <div class="media-group">
-      <div class="media-group-title">📚 维基百科 + 影响力数据库</div>
+      <div class="media-group-title" data-en="📚 Wikipedia + Influence Databases">📚 维基百科 + 影响力数据库</div>
       <div class="db-badges">
         <a class="db-badge" href="https://zh.wikipedia.org/zh-tw/Jeff_%26_Inthira" target="_blank" rel="noopener">📖 Wikipedia</a>
         <a class="db-badge" href="https://everipedia.org/wiki/lang_en/inthira-kalanjiam" target="_blank" rel="noopener">IQ.wiki</a>
@@ -1839,19 +1950,19 @@
 
     <!-- Static "stocked at" logos -->
     <div class="logos-row" style="margin-top: 36px;">
-      <span class="logo-pill">POPULAR · 上架签售</span>
+      <span class="logo-pill" data-en="POPULAR · Launch Signing">POPULAR · 上架签售</span>
       <span class="logo-pill">BookFest @ Malaysia 2026</span>
-      <span class="logo-pill">星洲日报</span>
+      <span class="logo-pill" data-en="Sin Chew Daily">星洲日报</span>
     </div>
   </section>
 
   <!-- QUOTE -->
   <section class="quote-block reveal">
-    <p class="quote-text">
+    <p class="quote-text" data-en="This is <em>not a self-help book</em> —<br/>it's a <em>practical playbook and business textbook</em>.">
       这<em>不是一本励志书</em>，<br/>
       是一本<em>实用工具书和商业教科书</em>。
     </p>
-    <p class="quote-attr">— <strong>星洲日报</strong>  ·  2026 年 3 月 27 日报道</p>
+    <p class="quote-attr" data-en="— <strong>Sin Chew Daily</strong>  ·  March 27, 2026">— <strong>星洲日报</strong>  ·  2026 年 3 月 27 日报道</p>
   </section>
 
   <!-- PODCAST FEATURE -->
@@ -1861,18 +1972,18 @@
       <div class="play-icon">▶</div>
     </a>
     <div class="podcast-body">
-      <div class="kicker">PODCAST · 大马百大企业家访谈系列</div>
-      <h3>《后起之秀 Podcast》 — <em>Jeff Leong 专访</em></h3>
-      <p class="podcast-quote">
+      <div class="kicker" data-en="PODCAST · Malaysia's Top 100 Entrepreneurs Interview Series">PODCAST · 大马百大企业家访谈系列</div>
+      <h3 data-en="《Rising Podcast》 — <em>Jeff Leong feature</em>">《后起之秀 Podcast》 — <em>Jeff Leong 专访</em></h3>
+      <p class="podcast-quote" data-en="&quot;The world thinks they're building IP. When they see my fists they tense up. Traffic, trust, conversion — those three have to connect in one line before the consumer's money lands in your pocket.&quot;">
         "全世界人以为他们在拍 IP，看到我的拳头都硬了。流量、信任、转换 —— 三条必须连成一线，消费者的钱才会放进你口袋。"
       </p>
-      <p style="font-size: 13px; color: var(--ie-gray-300); margin-bottom: 14px;">
+      <p style="font-size: 13px; color: var(--ie-gray-300); margin-bottom: 14px;" data-en="Topic: 90% of businesses build personal IP the wrong way. What's the secret to being #1?">
         主题：90% 的企业做个人 IP 的方法都错了。做到第一的秘诀是？
       </p>
       <div class="podcast-links">
         <a class="podcast-link" href="https://podcasts.apple.com/mo/podcast/%E5%90%8E%E8%B5%B7%E4%B9%8B%E7%A7%80-podcast/id1759522623" target="_blank" rel="noopener">▶ Apple Podcasts</a>
         <a class="podcast-link" href="https://creators.spotify.com/pod/profile/rising-podcast/" target="_blank" rel="noopener">▶ Spotify</a>
-        <a class="podcast-link" href="https://www.youtube.com/watch?v=75cQ0oB71oc" target="_blank" rel="noopener">▶ YouTube 完整版</a>
+        <a class="podcast-link" href="https://www.youtube.com/watch?v=75cQ0oB71oc" target="_blank" rel="noopener" data-en="▶ YouTube full episode">▶ YouTube 完整版</a>
         <a class="podcast-link" href="https://www.podbean.com/podcast-detail/6nqq9-3148f7/" target="_blank" rel="noopener">▶ Podbean</a>
       </div>
     </div>
@@ -1881,57 +1992,57 @@
   <!-- CLIENT RESULTS -->
   <section class="reveal">
     <div style="text-align: center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">CLIENT RESULTS · 真实战绩</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="CLIENT RESULTS">CLIENT RESULTS · 真实战绩</div>
     </div>
-    <h2 class="section-title">他们已经在<em>系统里</em>增长了</h2>
-    <p class="section-sub">不讲理论，只看 <strong>数字</strong>。这些都是经过 Influence Engine 系统操盘的真实品牌。</p>
+    <h2 class="section-title" data-en="They're already growing <em>inside the system</em>">他们已经在<em>系统里</em>增长了</h2>
+    <p class="section-sub" data-en="No theory — only <strong>numbers</strong>. Real brands run through the Influence Engine system.">不讲理论，只看 <strong>数字</strong>。这些都是经过 Influence Engine 系统操盘的真实品牌。</p>
     <div class="cases-grid">
       <div class="case-card">
         <div class="case-client">JEREMY</div><div class="case-company">Huamui 花眉</div>
-        <div class="case-industry">餐饮 · 80 年老店</div>
+        <div class="case-industry" data-en="F&amp;B · 80-year heritage">餐饮 · 80 年老店</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">0 → 2万</span><span class="case-stat-label">粉丝增长</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">1,000万+</span><span class="case-stat-label">总播放量</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="0 → 20K">0 → 2万</span><span class="case-stat-label" data-en="Follower growth">粉丝增长</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="10M+">1,000万+</span><span class="case-stat-label" data-en="Total views">总播放量</span></div>
         </div>
       </div>
       <div class="case-card">
         <div class="case-client">MORSE</div><div class="case-company">Morse Electronics</div>
-        <div class="case-industry">智能家电品牌</div>
+        <div class="case-industry" data-en="Smart home appliance brand">智能家电品牌</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">1.5万 → 8.5万</span><span class="case-stat-label">粉丝</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">2M+</span><span class="case-stat-label">单视频爆款</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="15K → 85K">1.5万 → 8.5万</span><span class="case-stat-label" data-en="Followers">粉丝</span></div>
+          <div class="case-stat-row"><span class="case-stat-num">2M+</span><span class="case-stat-label" data-en="Single viral video">单视频爆款</span></div>
         </div>
       </div>
       <div class="case-card">
         <div class="case-client">GARRICK</div><div class="case-company">Shoploooh</div>
-        <div class="case-industry">知名女装品牌</div>
+        <div class="case-industry" data-en="Leading women's fashion brand">知名女装品牌</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">100万+</span><span class="case-stat-label">自然观看</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">10,000+</span><span class="case-stat-label">粉丝增长</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="1M+">100万+</span><span class="case-stat-label" data-en="Organic views">自然观看</span></div>
+          <div class="case-stat-row"><span class="case-stat-num">10,000+</span><span class="case-stat-label" data-en="Follower growth">粉丝增长</span></div>
         </div>
       </div>
       <div class="case-card">
         <div class="case-client">JOANNE</div><div class="case-company">Melix</div>
-        <div class="case-industry">天然洗护 · 品牌二代</div>
+        <div class="case-industry" data-en="Natural skincare · 2nd-gen">天然洗护 · 品牌二代</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">3 位 → 6 位</span><span class="case-stat-label">单视频观看</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">系统化</span><span class="case-stat-label">持续高播放</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="3-digit → 6-digit">3 位 → 6 位</span><span class="case-stat-label" data-en="Per-video views">单视频观看</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="Systemized">系统化</span><span class="case-stat-label" data-en="Sustained high views">持续高播放</span></div>
         </div>
       </div>
       <div class="case-card">
-        <div class="case-client">AHYI</div><div class="case-company">海鲜哥</div>
-        <div class="case-industry">海鲜酒家 · 餐饮二代</div>
+        <div class="case-client">AHYI</div><div class="case-company" data-en="Seafood Brother">海鲜哥</div>
+        <div class="case-industry" data-en="Seafood restaurant · 2nd-gen">海鲜酒家 · 餐饮二代</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">0 → 2万</span><span class="case-stat-label">粉丝 · 仅 1 个月</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">百万+</span><span class="case-stat-label">播放量</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="0 → 20K">0 → 2万</span><span class="case-stat-label" data-en="Followers · in 1 month">粉丝 · 仅 1 个月</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="Millions+">百万+</span><span class="case-stat-label" data-en="Views">播放量</span></div>
         </div>
       </div>
       <div class="case-card">
         <div class="case-client">KATE YONG</div><div class="case-company">Mae Global</div>
-        <div class="case-industry">女性领导 · 电商</div>
+        <div class="case-industry" data-en="Women-led · e-commerce">女性领导 · 电商</div>
         <div class="case-results">
-          <div class="case-stat-row"><span class="case-stat-num">超半数视频</span><span class="case-stat-label">数十万观看</span></div>
-          <div class="case-stat-row"><span class="case-stat-num">新账号</span><span class="case-stat-label">快速突破瓶颈</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="Half the videos">超半数视频</span><span class="case-stat-label" data-en="Hundreds of K views">数十万观看</span></div>
+          <div class="case-stat-row"><span class="case-stat-num" data-en="New account">新账号</span><span class="case-stat-label" data-en="Past the plateau, fast">快速突破瓶颈</span></div>
         </div>
       </div>
     </div>
@@ -1940,10 +2051,10 @@
   <!-- BRAND CLIENT WALL — text wordmarks (as-worked-with nominative claim) -->
   <section class="brand-wall reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">CLIENTS · 品牌操盘记录</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="CLIENTS">CLIENTS · 品牌操盘记录</div>
     </div>
-    <h2 class="section-title">合作过的<em>品牌</em></h2>
-    <p class="section-sub">从国际大牌到本地 SME，<strong>40+ 品牌</strong>用过 Jeff 团队的操盘方法。书里讲的，全都跑过实战。</p>
+    <h2 class="section-title" data-en="Brands we've <em>worked with</em>">合作过的<em>品牌</em></h2>
+    <p class="section-sub" data-en="From global names to local SMEs, <strong>40+ brands</strong> have run on Jeff's team's playbook. Everything in the book has been battle-tested.">从国际大牌到本地 SME，<strong>40+ 品牌</strong>用过 Jeff 团队的操盘方法。书里讲的，全都跑过实战。</p>
     <div class="brand-wall-img">
       <img src="assets/deck/clients-logos.jpg" alt="Brands worked with by Jeff Leong's agency" loading="lazy"/>
     </div>
@@ -1952,41 +2063,41 @@
   <!-- OUR ACHIEVEMENT — Jeff's own milestone photos -->
   <section class="deck-section reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">OUR ACHIEVEMENT · 战绩纪录</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="OUR ACHIEVEMENTS">OUR ACHIEVEMENT · 战绩纪录</div>
     </div>
-    <h2 class="section-title">不是<em>讲故事</em>，是<em>真实战绩</em></h2>
-    <p class="section-sub">YouTube <strong>金盾</strong>（1M+ 订阅）· YT 流量 <strong>4 亿</strong> · 2019 双人杰青企业家 · LAFRE 进驻 Watsons 全马 700 间。</p>
+    <h2 class="section-title" data-en="Not <em>storytelling</em> — <em>real results</em>">不是<em>讲故事</em>，是<em>真实战绩</em></h2>
+    <p class="section-sub" data-en="YouTube <strong>Gold Play Button</strong> (1M+ subs) · <strong>400M</strong> YouTube views · 2019 Twin Young Entrepreneurs · LAFRE in 700 Watsons stores nationwide.">YouTube <strong>金盾</strong>（1M+ 订阅）· YT 流量 <strong>4 亿</strong> · 2019 双人杰青企业家 · LAFRE 进驻 Watsons 全马 700 间。</p>
     <div class="ach-grid">
       <div class="ach-card">
         <div class="ach-photo"><img src="assets/deck/sliced/ach-1-1mil-play.jpg" alt="1M YouTube Gold Play Button" loading="lazy"/></div>
         <div class="ach-body">
-          <div class="ach-tag">YouTube · 金盾</div>
-          <div class="ach-title">全马最快 0 → 100 万订阅</div>
-          <div class="ach-sub">中文频道 1 年 10 个月 破纪录</div>
+          <div class="ach-tag" data-en="YouTube · Gold Play">YouTube · 金盾</div>
+          <div class="ach-title" data-en="Malaysia's fastest 0 → 1M subscribers">全马最快 0 → 100 万订阅</div>
+          <div class="ach-sub" data-en="Chinese channel · 1 yr 10 mo · record-breaking">中文频道 1 年 10 个月 破纪录</div>
         </div>
       </div>
       <div class="ach-card">
         <div class="ach-photo"><img src="assets/deck/sliced/ach-2-6b-family.jpg" alt="Total reach milestone with family" loading="lazy"/></div>
         <div class="ach-body">
           <div class="ach-tag">CROSS PLATFORM</div>
-          <div class="ach-title">追踪人数 350 万</div>
-          <div class="ach-sub">FB / IG / TikTok / YT 合计 全网亿级观看</div>
+          <div class="ach-title" data-en="3.5M followers">追踪人数 350 万</div>
+          <div class="ach-sub" data-en="FB / IG / TikTok / YT combined · 100M+ views network-wide">FB / IG / TikTok / YT 合计 全网亿级观看</div>
         </div>
       </div>
       <div class="ach-card">
         <div class="ach-photo"><img src="assets/deck/sliced/ach-3-awards.jpg" alt="2019 Top 20 Young Entrepreneur Awards" loading="lazy"/></div>
         <div class="ach-body">
           <div class="ach-tag">AWARDS · 2019</div>
-          <div class="ach-title">双人杰青企业家</div>
-          <div class="ach-sub">大马 20 大杰出青年企业家 + 金凤卓越企业家大奖 + 亚洲诚信品牌奖</div>
+          <div class="ach-title" data-en="Twin Young Entrepreneurs">双人杰青企业家</div>
+          <div class="ach-sub" data-en="Malaysia Top 20 Young Entrepreneurs + Golden Phoenix Excellence Award + Asia Trusted Brand Award">大马 20 大杰出青年企业家 + 金凤卓越企业家大奖 + 亚洲诚信品牌奖</div>
         </div>
       </div>
       <div class="ach-card">
         <div class="ach-photo"><img src="assets/deck/sliced/ach-4-lafre-watsons.jpg" alt="LAFRE × Watsons retail event" loading="lazy"/></div>
         <div class="ach-body">
           <div class="ach-tag">LAFRE × WATSONS</div>
-          <div class="ach-title">进驻 Watsons 全马 700 间</div>
-          <div class="ach-sub">旗下品牌 LAFRE 荣获 Watsons 年度销售最多本地品牌之一</div>
+          <div class="ach-title" data-en="In 700 Watsons stores nationwide">进驻 Watsons 全马 700 间</div>
+          <div class="ach-sub" data-en="LAFRE — one of Watsons' top-selling local brands of the year">旗下品牌 LAFRE 荣获 Watsons 年度销售最多本地品牌之一</div>
         </div>
       </div>
     </div>
@@ -1995,44 +2106,44 @@
   <!-- BRAND AMBASSADOR — Jeff/Inthira as campaign subjects -->
   <section class="deck-section reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">BRAND AMBASSADOR · 品牌代言人</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="BRAND AMBASSADOR">BRAND AMBASSADOR · 品牌代言人</div>
     </div>
-    <h2 class="section-title">同时是 <em>5 个品牌</em>的代言人</h2>
-    <p class="section-sub">Celcom 天地通 · LAFRE × Watsons · wells 韩国水机 · Crown 内衣 · Morse 家电 —— 大马本土 + 跨国品牌都点头的影响力。</p>
+    <h2 class="section-title" data-en="Ambassador for <em>5 brands</em> at the same time">同时是 <em>5 个品牌</em>的代言人</h2>
+    <p class="section-sub" data-en="Celcom · LAFRE × Watsons · wells Korean water purifier · Crown · Morse home appliances — influence both local Malaysian and multinational brands trust.">Celcom 天地通 · LAFRE × Watsons · wells 韩国水机 · Crown 内衣 · Morse 家电 —— 大马本土 + 跨国品牌都点头的影响力。</p>
     <div class="amb-grid">
       <div class="amb-card">
         <div class="amb-photo"><img src="assets/deck/sliced/amb-1-celcom.jpg" alt="Celcom 天地通 ambassador" loading="lazy"/></div>
         <div class="amb-body">
           <div class="amb-name">Celcom 天地通</div>
-          <div class="amb-tag">大马首屈一指 通信</div>
+          <div class="amb-tag" data-en="Malaysia's leading telco">大马首屈一指 通信</div>
         </div>
       </div>
       <div class="amb-card">
         <div class="amb-photo"><img src="assets/deck/sliced/amb-2-lafre.jpg" alt="LAFRE × Watsons" loading="lazy"/></div>
         <div class="amb-body">
           <div class="amb-name">LAFRE × Watsons</div>
-          <div class="amb-tag">入驻全马 700 间</div>
+          <div class="amb-tag" data-en="700 Watsons stores nationwide">入驻全马 700 间</div>
         </div>
       </div>
       <div class="amb-card">
         <div class="amb-photo"><img src="assets/deck/sliced/amb-3-wells.jpg" alt="wells brand ambassador" loading="lazy"/></div>
         <div class="amb-body">
           <div class="amb-name">wells</div>
-          <div class="amb-tag">韩国水机 · 大马</div>
+          <div class="amb-tag" data-en="Korean water purifier · MY">韩国水机 · 大马</div>
         </div>
       </div>
       <div class="amb-card">
         <div class="amb-photo"><img src="assets/deck/sliced/amb-4-crown.jpg" alt="Crown brand" loading="lazy"/></div>
         <div class="amb-body">
           <div class="amb-name">Crown</div>
-          <div class="amb-tag">内衣品牌</div>
+          <div class="amb-tag" data-en="Lingerie brand">内衣品牌</div>
         </div>
       </div>
       <div class="amb-card">
         <div class="amb-photo"><img src="assets/deck/sliced/amb-5-morse.jpg" alt="Morse brand" loading="lazy"/></div>
         <div class="amb-body">
           <div class="amb-name">Morse</div>
-          <div class="amb-tag">家电品牌</div>
+          <div class="amb-tag" data-en="Home appliance brand">家电品牌</div>
         </div>
       </div>
     </div>
@@ -2041,26 +2152,26 @@
   <!-- FAN MEETUP GALLERY — Jeff's own promotional event photos -->
   <section class="deck-section reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">FAN MEETUPS · 粉丝见面会</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="FAN MEETUPS">FAN MEETUPS · 粉丝见面会</div>
     </div>
-    <h2 class="section-title">不是<em>网红</em>，是<em>能召唤人群</em>的网红</h2>
-    <p class="section-sub">3 个市场，同一种现象 —— 商场围观、签售排队、合照不断。<strong>这是 Jeff 把流量转成线下信任</strong>的真实样本。</p>
+    <h2 class="section-title" data-en="Not just an <em>influencer</em> — an influencer who <em>summons crowds</em>">不是<em>网红</em>，是<em>能召唤人群</em>的网红</h2>
+    <p class="section-sub" data-en="3 markets, the same phenomenon — mall stampedes, signing queues, non-stop photos. <strong>This is Jeff turning views into offline trust</strong> — in the wild.">3 个市场，同一种现象 —— 商场围观、签售排队、合照不断。<strong>这是 Jeff 把流量转成线下信任</strong>的真实样本。</p>
 
     <div class="deck-grid">
       <div class="deck-card">
         <div class="deck-img"><img src="assets/deck/meetup-my.jpg" alt="Malaysia fan meetup crowd at shopping malls" loading="lazy"/></div>
         <div class="deck-caption">
-          <div class="label">MALAYSIA · 5 场</div>
-          <div class="title">大马粉丝见面会</div>
-          <div class="sub">MORSE 旗舰店开幕 / 商场 atrium 包围 / 数千人到场</div>
+          <div class="label" data-en="MALAYSIA · 5 events">MALAYSIA · 5 场</div>
+          <div class="title" data-en="Malaysia fan meetups">大马粉丝见面会</div>
+          <div class="sub" data-en="MORSE flagship opening / Mall atrium swarms / Thousands attending">MORSE 旗舰店开幕 / 商场 atrium 包围 / 数千人到场</div>
         </div>
       </div>
       <div class="deck-card">
         <div class="deck-img"><img src="assets/deck/meetup-sg.jpg" alt="Singapore fan meetup crowd" loading="lazy"/></div>
         <div class="deck-caption">
-          <div class="label">SINGAPORE · 跨境</div>
-          <div class="title">新加坡粉丝见面会</div>
-          <div class="sub">海外市场亲身验证 —— 内容跨境，热度不打折</div>
+          <div class="label" data-en="SINGAPORE · cross-border">SINGAPORE · 跨境</div>
+          <div class="title" data-en="Singapore fan meetup">新加坡粉丝见面会</div>
+          <div class="sub" data-en="Overseas validation — content travels, heat doesn't drop">海外市场亲身验证 —— 内容跨境，热度不打折</div>
         </div>
       </div>
     </div>
@@ -2068,9 +2179,9 @@
     <div class="deck-wide" style="margin-top: 18px;">
       <div class="deck-img"><img src="assets/deck/meetup-tw.jpg" alt="Taiwan fan meetup at night market" loading="lazy"/></div>
       <div class="deck-caption">
-        <div class="label">TAIWAN · 街头实验</div>
-        <div class="title">台湾粉丝见面会</div>
-        <div class="sub">夜市直接被人群围住 —— 内容真正打透，不只是数字</div>
+        <div class="label" data-en="TAIWAN · street test">TAIWAN · 街头实验</div>
+        <div class="title" data-en="Taiwan fan meetup">台湾粉丝见面会</div>
+        <div class="sub" data-en="Surrounded at a night market — content truly cuts through, not just stats">夜市直接被人群围住 —— 内容真正打透，不只是数字</div>
       </div>
     </div>
   </section>
@@ -2078,10 +2189,10 @@
   <!-- GEO REACH -->
   <section class="reveal">
     <div style="text-align:center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">GEO REACH · 跨境影响力</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="GEO REACH">GEO REACH · 跨境影响力</div>
     </div>
-    <h2 class="section-title">观众<em>遍布</em>大中华区 + 东南亚</h2>
-    <p class="section-sub">不只是马来西亚 —— 你的内容如果做得对，可以同时服务 5 个市场。</p>
+    <h2 class="section-title" data-en="Audience <em>across</em> Greater China + SEA">观众<em>遍布</em>大中华区 + 东南亚</h2>
+    <p class="section-sub" data-en="Not just Malaysia — if your content is right, it can serve 5 markets at the same time.">不只是马来西亚 —— 你的内容如果做得对，可以同时服务 5 个市场。</p>
     <div class="geo-grid">
       <div class="geo-card">
         <div class="geo-flag">🇲🇾</div>
@@ -2120,20 +2231,20 @@
       <img src="assets/jeff-photo.png" alt="Jeff Leong" />
     </div>
     <div>
-      <div class="jeff-note-kicker">FROM JEFF · 给你的话</div>
-      <h3>为什么我<em>免费寄</em>这本书？</h3>
-      <p style="font-size: 13px; color: var(--ie-gray-500); margin-bottom: 14px; font-style: italic;">
+      <div class="jeff-note-kicker" data-en="FROM JEFF · A NOTE TO YOU">FROM JEFF · 给你的话</div>
+      <h3 data-en="Why am I <em>mailing you</em> this book — for free?">为什么我<em>免费寄</em>这本书？</h3>
+      <p style="font-size: 13px; color: var(--ie-gray-500); margin-bottom: 14px; font-style: italic;" data-en="Former Singapore International Magic Champion · Former 8TV national MC Champion (1 of 500) · Now in content">
         前新加坡国际魔术比赛冠军 · 前八度空间全国主持人冠军 (500 选 1) · 跨界做内容
       </p>
-      <p>
+      <p data-en="I've been at this 20 years — co-built 2 companies doing 8-figure annual revenue, hit 1M YouTube subs in 10 months with 400M total views. Along the way I've seen too many founders — not for lack of effort, but <strong>using the wrong method</strong>.">
         我做了 20 年，联合打造了 2 家年营收 8 位数的公司，10 个月做到 100 万订阅、4 亿 YT 流量。
         这一路我看见太多老板 —— 不是没努力，是<strong>找错方法</strong>。
       </p>
-      <p>
+      <p data-en="I've compressed every method, every failure, and every real result into this 180-page book. Rather than sell it for RM 50 to strangers, I'd rather <strong>mail it free to founders who'll actually read it</strong>.">
         我把所有的方法、所有失败的教训、所有真实战绩，都浓缩进这本 180 页的书。
         与其用 RM 50 卖给路人，不如<strong>免费寄给真正会读完的老板</strong>。
       </p>
-      <p>
+      <p data-en="If after reading it clicks, book a 30-min consult yourself. If it doesn't, <em>just think of it as a book I sent you</em>.">
         如果你看完觉得有感觉，自己来约 30 分钟咨询电话。
         如果看完没感觉，<em>就当我送你一本书</em>。
       </p>
@@ -2144,29 +2255,29 @@
   <!-- WHO IT'S FOR / NOT FOR -->
   <section class="reveal">
     <div style="text-align: center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">WHO IT'S FOR · 谁该看</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="WHO IT'S FOR">WHO IT'S FOR · 谁该看</div>
     </div>
-    <h2 class="section-title">不是<em>所有人</em>都适合这本书</h2>
-    <p class="section-sub">我们 <strong>不卖给所有人</strong>。这本书写给特定阶段的老板。</p>
+    <h2 class="section-title" data-en="<em>Not everyone</em> should read this book">不是<em>所有人</em>都适合这本书</h2>
+    <p class="section-sub" data-en="We <strong>don't sell to everyone</strong>. This book is written for founders at a specific stage.">我们 <strong>不卖给所有人</strong>。这本书写给特定阶段的老板。</p>
     <div class="fit-grid">
       <div class="fit-card fit-yes">
-        <h4>✓ 这本书写给</h4>
+        <h4 data-en="✓ This book is for">✓ 这本书写给</h4>
         <ul>
-          <li>已经有产品/客户，但增长卡住的 <strong>SME 老板</strong></li>
-          <li>接手家族企业、想用现代化方式重新做品牌的 <strong>二代接班</strong></li>
-          <li>有粉丝有流量，但不知道怎么<strong>变现的自媒体</strong></li>
-          <li>有专业能力，但圈外没人认识你的<strong>讲师 / 教练 / 顾问</strong></li>
-          <li>愿意亲自把方法<strong>落地执行</strong>的老板</li>
+          <li data-en="<strong>SME founders</strong> with product/customers but stuck growth">已经有产品/客户，但增长卡住的 <strong>SME 老板</strong></li>
+          <li data-en="<strong>2nd-gen successors</strong> modernizing the family business brand">接手家族企业、想用现代化方式重新做品牌的 <strong>二代接班</strong></li>
+          <li data-en="<strong>Creators</strong> with audience but no monetization">有粉丝有流量，但不知道怎么<strong>变现的自媒体</strong></li>
+          <li data-en="<strong>Coaches / consultants / experts</strong> unknown outside their circle">有专业能力，但圈外没人认识你的<strong>讲师 / 教练 / 顾问</strong></li>
+          <li data-en="Founders willing to <strong>personally execute</strong> the playbook">愿意亲自把方法<strong>落地执行</strong>的老板</li>
         </ul>
       </div>
       <div class="fit-card fit-no">
-        <h4>✗ 这本书不写给</h4>
+        <h4 data-en="✗ This book is NOT for">✗ 这本书不写给</h4>
         <ul>
-          <li>0-1 阶段，<strong>还没产品</strong>的创业新手</li>
-          <li>MLM / 灰产 / 币圈 / 博彩 任何监管灰色地带</li>
-          <li>想看一本书就能 <strong>3 个月翻 10 倍</strong>的捷径党</li>
-          <li>不愿意老板自己出镜，也不肯写 SOP 的</li>
-          <li>把书放着不读、只想<strong>白嫖福利</strong>的人</li>
+          <li data-en="Zero-to-one stage, <strong>no product yet</strong>">0-1 阶段，<strong>还没产品</strong>的创业新手</li>
+          <li data-en="MLM / grey-area industries / crypto / gambling — any regulatory grey zone">MLM / 灰产 / 币圈 / 博彩 任何监管灰色地带</li>
+          <li data-en="Shortcut hunters expecting <strong>10× in 3 months</strong> from one book">想看一本书就能 <strong>3 个月翻 10 倍</strong>的捷径党</li>
+          <li data-en="Founders unwilling to be on camera or write SOPs">不愿意老板自己出镜，也不肯写 SOP 的</li>
+          <li data-en="People who'll just <strong>grab the freebie</strong> and never read it">把书放着不读、只想<strong>白嫖福利</strong>的人</li>
         </ul>
       </div>
     </div>
@@ -2174,24 +2285,24 @@
 
   <!-- WHAT YOU GET -->
   <section class="reveal">
-    <h2 class="section-title">你会<em>收到的</em></h2>
+    <h2 class="section-title" data-en="What you'll <em>receive</em>">你会<em>收到的</em></h2>
     <div class="what-you-get">
       <div class="wyg-grid">
         <div class="wyg-item">
           <div class="wyg-icon">✍</div>
-          <p class="wyg-text"><strong>《注意力戰爭》</strong>一本 ， Jeff 亲笔签名内页</p>
+          <p class="wyg-text" data-en="<strong>《The Attention War》</strong> — one copy, signed by Jeff inside"><strong>《注意力戰爭》</strong>一本 ， Jeff 亲笔签名内页</p>
         </div>
         <div class="wyg-item">
           <div class="wyg-icon">💌</div>
-          <p class="wyg-text">一张<strong>针对你业务的手写卡片</strong>（不是模板）</p>
+          <p class="wyg-text" data-en="A <strong>handwritten card tailored to your business</strong> (not a template)">一张<strong>针对你业务的手写卡片</strong>（不是模板）</p>
         </div>
         <div class="wyg-item">
           <div class="wyg-icon">🚚</div>
-          <p class="wyg-text"><strong>免运费</strong>，Poslaju 2-3 天到 MY 境内</p>
+          <p class="wyg-text" data-en="<strong>Free shipping</strong>, Poslaju 2–3 days within Malaysia"><strong>免运费</strong>，Poslaju 2-3 天到 MY 境内</p>
         </div>
         <div class="wyg-item">
           <div class="wyg-icon">🤝</div>
-          <p class="wyg-text">没有后续推销，<strong>看完书你自己决定</strong>下一步</p>
+          <p class="wyg-text" data-en="No follow-up sales pressure — <strong>after you read it, you decide</strong> the next step">没有后续推销，<strong>看完书你自己决定</strong>下一步</p>
         </div>
       </div>
     </div>
@@ -2200,14 +2311,14 @@
   <!-- FAQ -->
   <section class="reveal">
     <div style="text-align: center;">
-      <div class="kicker" style="justify-content: center; display: inline-flex;">FAQ · 常见问题</div>
+      <div class="kicker" style="justify-content: center; display: inline-flex;" data-en="FAQ">FAQ · 常见问题</div>
     </div>
-    <h2 class="section-title">你可能<em>会问的</em></h2>
+    <h2 class="section-title" data-en="You might <em>be wondering</em>">你可能<em>会问的</em></h2>
 
     <div class="faq-list">
       <details class="faq-item">
-        <summary>真的免费？没有任何套路？</summary>
-        <div class="ans">
+        <summary data-en="Really free? No catch?">真的免费？没有任何套路？</summary>
+        <div class="ans" data-en="Truly free. <strong>I won't charge you any shipping or fees</strong>. If you want a 30-min consult after reading, that's also free (Jeff's team handles it). Only if you later choose deep engagement do you enter paid consulting (from RM 30K). No hidden fees anywhere.">
           真的免费。<strong>我不会向你收取任何运费或费用</strong>。
           如果你看完想约咨询电话，30 分钟也是免费的（Jeff 团队接）。
           只有当你之后决定深度合作，才会进入付费咨询阶段（RM 30K 起）。
@@ -2216,8 +2327,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>为什么 Jeff 要免费寄书给陌生人？</summary>
-        <div class="ans">
+        <summary data-en="Why send free books to strangers?">为什么 Jeff 要免费寄书给陌生人？</summary>
+        <div class="ans" data-en="Because for us, <strong>1 high-quality client who's read the book</strong> is worth more than <strong>100 shallow-intent leads from ads</strong>. RM 50 to mail you a copy in exchange for a deeper introduction — even if only 5% later convert, we win.">
           因为对我们来说，<strong>1 个读完书的高质量客户</strong>，
           比 <strong>100 个被广告砸出来的浅意图 leads</strong>，
           更值得投入。一本书 RM 50 寄过去，
@@ -2226,8 +2337,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>会寄到我家吗？海外能寄吗？</summary>
-        <div class="ans">
+        <summary data-en="Will it ship to my home? International?">会寄到我家吗？海外能寄吗？</summary>
+        <div class="ans" data-en="<strong>Malaysia only</strong>, Poslaju normal post, 2–3 days. Singapore / Indonesia / overseas not shipped for now (postage too high to stay free). Home address or office address — either is fine.">
           <strong>仅限马来西亚境内</strong>，Poslaju 普通邮寄 2-3 天到。
           新加坡 / 印尼 / 国外暂时不寄（运费太高，不在免费范围）。
           你给我家庭地址、办公室地址都可以。
@@ -2235,8 +2346,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>多久会寄出来？</summary>
-        <div class="ans">
+        <summary data-en="How fast does it ship?">多久会寄出来？</summary>
+        <div class="ans" data-en="Ships <strong>within 24 hours</strong> of submission. Poslaju tracking number sent to your WhatsApp. 2–3 working days within MY. Every copy is signed by Jeff with a handwritten card from the assistant.">
           表单填完后 <strong>24 小时内寄出</strong>。
           Poslaju tracking 号会 WhatsApp 给你。
           MY 境内 2-3 个工作日到。
@@ -2245,8 +2356,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>本月寄完了怎么办？</summary>
-        <div class="ans">
+        <summary data-en="What if this month's batch is gone?">本月寄完了怎么办？</summary>
+        <div class="ans" data-en="30 signed copies per month. Usually claimed within the first week — please submit early. Once full, you can buy at POPULAR directly (RM 50).">
           每个月限 30 本签名书。
           月初通常 1 周内就会被抢光，请尽早填表单。
           名额满了之后，可以到 POPULAR 书店直接购买（RM 50）。
@@ -2254,8 +2365,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>我看完书后必须约电话吗？</summary>
-        <div class="ans">
+        <summary data-en="Do I have to book a call after reading?">我看完书后必须约电话吗？</summary>
+        <div class="ans" data-en="<strong>Not at all.</strong> If the thinking clicks, WhatsApp us to book the call. If not, take it as a gift — <em>no follow-up at all</em>. This is also how we filter clients.">
           <strong>不必须</strong>。
           看完觉得思路对，自己来 WhatsApp 我们约电话。
           看完没感觉，就当我们送你一本书，<em>不会有任何后续打扰</em>。
@@ -2267,58 +2378,58 @@
 
   <!-- FORM -->
   <section id="form-view" class="reveal">
-    <div class="scarcity-bar">
+    <div class="scarcity-bar" data-en="🔥 POPULAR Sold Out · Shopee Sold Out · <strong id=&quot;slots&quot;>17</strong> signed copies left with me">
       🔥 POPULAR 已售完 · Shopee 已售完 · 我手上还有 <strong id="slots">17</strong> 本签名版
     </div>
 
     <form id="book-form">
       <div class="form-header">
-        <h3>把你的地址给我，明天寄出。</h3>
-        <p>5 个字段 · 30 秒填完</p>
+        <h3 data-en="Give me your address — I'll ship tomorrow.">把你的地址给我，明天寄出。</h3>
+        <p data-en="5 fields · 30 seconds to complete">5 个字段 · 30 秒填完</p>
       </div>
       <div class="form-grid">
         <div>
-          <label>你的姓名 · Name</label>
-          <input type="text" id="name" name="name" required placeholder="你怎么称呼" autocomplete="name" />
+          <label data-en="Your Name">你的姓名 · Name</label>
+          <input type="text" id="name" name="name" required placeholder="你怎么称呼" data-placeholder-en="What should we call you" autocomplete="name" />
         </div>
         <div>
-          <label>公司 / 品牌 · Company</label>
-          <input type="text" id="company" name="company" placeholder="你做的生意 / 品牌名" autocomplete="organization" />
+          <label data-en="Company / Brand">公司 / 品牌 · Company</label>
+          <input type="text" id="company" name="company" placeholder="你做的生意 / 品牌名" data-placeholder-en="Your business / brand name" autocomplete="organization" />
         </div>
         <div class="row">
           <div>
-            <label>WhatsApp · 必填</label>
+            <label data-en="WhatsApp · Required">WhatsApp · 必填</label>
             <input type="tel" id="whatsapp" name="whatsapp" required placeholder="+60xxxxxxxxx" autocomplete="tel" />
           </div>
           <div>
-            <label>Email · 可选</label>
-            <input type="email" id="email" name="email" placeholder="(可选)" autocomplete="email" />
+            <label data-en="Email · Optional">Email · 可选</label>
+            <input type="email" id="email" name="email" placeholder="(可选)" data-placeholder-en="(optional)" autocomplete="email" />
           </div>
         </div>
         <div>
-          <label>完整寄送地址 + 邮编</label>
-          <textarea id="address" name="address" required placeholder="例: 23, Jalan SS2/24, Petaling Jaya, 47300 Selangor"></textarea>
+          <label data-en="Full shipping address + postcode">完整寄送地址 + 邮编</label>
+          <textarea id="address" name="address" required placeholder="例: 23, Jalan SS2/24, Petaling Jaya, 47300 Selangor" data-placeholder-en="e.g. 23, Jalan SS2/24, Petaling Jaya, 47300 Selangor"></textarea>
         </div>
         <div>
-          <label>你现在的阶段 · 帮我们写针对你的卡片</label>
+          <label data-en="Your current stage · helps us write your card">你现在的阶段 · 帮我们写针对你的卡片</label>
           <select id="stage" name="stage" required>
-            <option value="">请选择</option>
-            <option>刚开始做营销 / 还没方向</option>
-            <option>已经在做内容，结果不稳定</option>
-            <option>投流中，转化率偏低</option>
-            <option>有团队，缺系统 / SOP</option>
-            <option>准备品牌焕新 / 新品上市</option>
-            <option>个人 IP / 自媒体想商业化</option>
-            <option>其他</option>
+            <option value="" data-en="Please select">请选择</option>
+            <option data-en="Just starting marketing / no direction yet">刚开始做营销 / 还没方向</option>
+            <option data-en="Already doing content, results inconsistent">已经在做内容，结果不稳定</option>
+            <option data-en="Running ads, conversion too low">投流中，转化率偏低</option>
+            <option data-en="Have a team, missing system / SOPs">有团队，缺系统 / SOP</option>
+            <option data-en="Preparing brand refresh / new product launch">准备品牌焕新 / 新品上市</option>
+            <option data-en="Personal IP / creator looking to monetize">个人 IP / 自媒体想商业化</option>
+            <option data-en="Other">其他</option>
           </select>
         </div>
         <div>
-          <label>最想解决的事 · 一句话就好</label>
-          <textarea id="goal" name="goal" placeholder="例: 我们 TikTok 6 个月发了 200 条，播放从 50K 掉到 5K"></textarea>
+          <label data-en="What you most want to solve · one sentence">最想解决的事 · 一句话就好</label>
+          <textarea id="goal" name="goal" placeholder="例: 我们 TikTok 6 个月发了 200 条，播放从 50K 掉到 5K" data-placeholder-en="e.g. We posted 200 TikToks in 6 months, views dropped from 50K to 5K"></textarea>
         </div>
-        <button type="submit" id="submit-btn">📚 寄一本签名书给我</button>
+        <button type="submit" id="submit-btn" data-en="📚 Send me a signed copy">📚 寄一本签名书给我</button>
       </div>
-      <p class="fine-print">
+      <p class="fine-print" data-en="We use your info only to ship the book + (optional) follow-up.<br/>Never sold to third parties. Reply <strong>STOP</strong> on WhatsApp anytime to opt out.">
         我们用你的信息只为寄书 + 后续 (可选) 联系。<br/>
         不会卖给第三方。任何时候 WhatsApp 回 <strong>STOP</strong> 即移除。
       </p>
@@ -2328,16 +2439,16 @@
   <!-- SUCCESS -->
   <section id="success">
     <div class="emoji-big">📦</div>
-    <h2>收到了</h2>
-    <p>书会在 <strong>24 小时</strong>内寄出。</p>
-    <p>Poslaju tracking number 会 WhatsApp 给你。</p>
-    <a href="https://wa.me/60123456789" class="wa-btn">💬 直接 WhatsApp Jeff team</a>
+    <h2 data-en="Got it">收到了</h2>
+    <p data-en="Your book ships <strong>within 24 hours</strong>.">书会在 <strong>24 小时</strong>内寄出。</p>
+    <p data-en="Poslaju tracking number sent to your WhatsApp.">Poslaju tracking number 会 WhatsApp 给你。</p>
+    <a href="https://wa.me/60123456789" class="wa-btn" data-en="💬 WhatsApp Jeff team directly">💬 直接 WhatsApp Jeff team</a>
   </section>
 
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-brand">INFLUENCE ENGINE</div>
-    <p>© 2026 · Built by Jeff Leong</p>
+    <p data-en="© 2026 · Built by Jeff Leong">© 2026 · Built by Jeff Leong</p>
     <p style="margin-top: 8px;"><a href="https://influenceengine.my">influenceengine.my</a> · <a href="https://instagram.com/jeffleong.my">@jeffleong.my</a></p>
   </div>
 </div>
@@ -2345,21 +2456,120 @@
 <script>
   const API_BASE = "https://leadgen-py.influenceengine.my";
 
+  /* ============ LANGUAGE TOGGLE ============ */
+  // Bilingual meta + chrome strings
+  const META_I18N = {
+    zh: {
+      title:    '免费寄你一本《注意力戰爭》签名书 · Jeff Leong',
+      desc:     'Jeff Leong 出版的《注意力戰爭》—— POPULAR 上架、星洲日报报道。免费寄你一本签名书。',
+      ogTitle:  '免费寄你一本《注意力戰爭》签名书',
+      ogDesc:   'Jeff Leong 签名 + 手写卡片，免费寄到你家。本月剩 17 本。',
+      htmlLang: 'zh-Hans',
+    },
+    en: {
+      title:    'Free Signed Copy of《The Attention War》· Jeff Leong',
+      desc:     '《The Attention War》by Jeff Leong — stocked at POPULAR, featured in Sin Chew Daily. Free signed copy mailed to you.',
+      ogTitle:  'Free Signed Copy of《The Attention War》',
+      ogDesc:   'Signed by Jeff + handwritten card, mailed free. 17 copies left this month.',
+      htmlLang: 'en',
+    },
+  };
+  const BTN_SEND = { zh: '📚 寄一本签名书给我', en: '📚 Send me a signed copy' };
+  const BTN_SENDING = { zh: '寄出中...', en: 'Sending...' };
+  const ALERT_FAIL = {
+    zh: '发送失败，请直接 WhatsApp 我们: +60 12-345 6789',
+    en: 'Submission failed. Please WhatsApp us directly: +60 12-345 6789',
+  };
+
+  // Snapshot original CN innerHTML on first read so we can restore later
+  const _cnHTML = new WeakMap();
+  const _cnPlaceholder = new WeakMap();
+
+  function getLang() {
+    const saved = localStorage.getItem('ie-lang');
+    if (saved === 'en' || saved === 'zh') return saved;
+    // Default: if browser is English-preferred and not Chinese, default to EN
+    const nav = (navigator.language || '').toLowerCase();
+    if (nav.startsWith('zh')) return 'zh';
+    return nav.startsWith('en') ? 'en' : 'zh';
+  }
+
+  function setLang(lang) {
+    if (lang !== 'en' && lang !== 'zh') lang = 'zh';
+
+    // Body / html lang
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', META_I18N[lang].htmlLang);
+
+    // Swap text content
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (!_cnHTML.has(el)) _cnHTML.set(el, el.innerHTML);
+      el.innerHTML = lang === 'en' ? el.getAttribute('data-en') : _cnHTML.get(el);
+    });
+
+    // Swap input/textarea placeholders
+    document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+      if (!_cnPlaceholder.has(el)) _cnPlaceholder.set(el, el.getAttribute('placeholder') || '');
+      const en = el.getAttribute('data-placeholder-en');
+      el.setAttribute('placeholder', lang === 'en' ? en : _cnPlaceholder.get(el));
+    });
+
+    // Meta / title / OG
+    document.title = META_I18N[lang].title;
+    const setMeta = (selector, attr, value) => {
+      const tag = document.querySelector(selector);
+      if (tag) tag.setAttribute(attr, value);
+    };
+    setMeta('meta[name="description"]', 'content', META_I18N[lang].desc);
+    setMeta('meta[property="og:title"]', 'content', META_I18N[lang].ogTitle);
+    setMeta('meta[property="og:description"]', 'content', META_I18N[lang].ogDesc);
+
+    // Active button state
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+
+    // Re-bind slot count (the swap might have replaced the #slots span inside scarcity-bar)
+    const slots = document.getElementById('slots');
+    if (slots && window._slotsRemaining !== undefined) slots.textContent = window._slotsRemaining;
+
+    // Persist
+    localStorage.setItem('ie-lang', lang);
+  }
+
+  // Wire toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+  });
+
+  // Initial language
+  setLang(getLang());
+
+  /* ============ SLOTS COUNTER ============ */
   fetch(`${API_BASE}/landing/slots-remaining`)
     .then(r => r.json())
-    .then(d => { if (d.remaining !== undefined) document.getElementById('slots').textContent = d.remaining; })
+    .then(d => {
+      if (d.remaining !== undefined) {
+        window._slotsRemaining = d.remaining;
+        const slots = document.getElementById('slots');
+        if (slots) slots.textContent = d.remaining;
+      }
+    })
     .catch(() => {});
 
+  /* ============ REVEAL ON SCROLL ============ */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  /* ============ FORM SUBMIT ============ */
   document.getElementById('book-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const lang = document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'zh';
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
-    btn.textContent = '寄出中...';
+    btn.textContent = BTN_SENDING[lang];
     const form = e.target;
     const data = {
       name: form.name.value,
@@ -2370,6 +2580,7 @@
       stage: form.stage.value,
       goal: form.goal.value,
       source: 'landing_page',
+      lang: lang,
       utm: new URLSearchParams(location.search).toString(),
     };
     try {
@@ -2385,8 +2596,8 @@
       if (window.fbq) fbq('track', 'Lead');
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = '📚 寄一本签名书给我';
-      alert('发送失败，请直接 WhatsApp 我们: +60 12-345 6789');
+      btn.textContent = BTN_SEND[lang];
+      alert(ALERT_FAIL[lang]);
     }
   });
 </script>
