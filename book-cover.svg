@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 525" width="375" height="525">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#143341"/>
+      <stop offset="40%" stop-color="#0E2A38"/>
+      <stop offset="100%" stop-color="#0A1E29"/>
+    </linearGradient>
+    <linearGradient id="red-tag" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D8361A"/>
+      <stop offset="100%" stop-color="#F26A2E"/>
+    </linearGradient>
+    <radialGradient id="portrait-light" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <filter id="splatter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0.85  0 0 0 0 0.13  0 0 0 0 0.05  0 0 0 1 0"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="375" height="525" fill="url(#bg)"/>
+
+  <!-- subtle background elements (camera / graph hints) -->
+  <g opacity="0.08" stroke="#A9BDC8" stroke-width="0.5" fill="none">
+    <rect x="280" y="60" width="55" height="40" rx="3"/>
+    <circle cx="307" cy="80" r="10"/>
+    <polyline points="20,460 60,440 100,455 140,410 180,430 220,395"/>
+  </g>
+
+  <!-- portrait light source -->
+  <ellipse cx="187" cy="280" rx="180" ry="160" fill="url(#portrait-light)"/>
+
+  <!-- Title 注意力 -->
+  <text x="187" y="62" text-anchor="middle"
+        font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+        font-size="54" font-weight="900" fill="#FFFFFF" letter-spacing="2">注意力</text>
+
+  <!-- Title 戰爭 (red, like actual cover) -->
+  <text x="187" y="125" text-anchor="middle"
+        font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+        font-size="58" font-weight="900" fill="#F26A2E" letter-spacing="3">戰爭</text>
+
+  <!-- English subtitle -->
+  <text x="187" y="150" text-anchor="middle"
+        font-family="Oswald, Inter, sans-serif"
+        font-size="13" font-weight="600" fill="#E6EEF3" letter-spacing="4">THE ATTENTION WAR</text>
+
+  <!-- Side vertical pull-quote (Chinese, stylized) -->
+  <g opacity="0.7">
+    <text x="40" y="180" font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+          font-size="9" fill="#FFC93A" font-weight="500">一個網紅的自我修養與商業覺悟</text>
+    <text x="40" y="194" font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+          font-size="9" fill="#FFC93A" font-weight="500">從素人到八位數營收的真實路徑</text>
+  </g>
+
+  <!-- Stylized portrait silhouette (Jeff) -->
+  <g>
+    <!-- head -->
+    <ellipse cx="187" cy="240" rx="42" ry="50" fill="#1C2A35"/>
+    <!-- hair / shadow -->
+    <path d="M 145 220 Q 145 200 167 195 Q 187 188 207 195 Q 229 200 229 220 Q 229 232 220 220 Q 200 215 187 215 Q 174 215 154 220 Q 145 232 145 220 Z" fill="#0A1E29"/>
+    <!-- shoulders / white t-shirt -->
+    <path d="M 100 320 Q 100 295 130 285 L 145 280 Q 145 305 187 305 Q 229 305 229 280 L 244 285 Q 274 295 274 320 L 274 440 L 100 440 Z" fill="#F5F1E8"/>
+    <!-- t-shirt shadow / fold -->
+    <path d="M 145 305 Q 187 320 229 305 L 229 440 L 145 440 Z" fill="#E5DECF" opacity="0.5"/>
+
+    <!-- RED PAINT / BLOOD SPLATTER (signature visual of the book) -->
+    <g fill="#D8361A">
+      <path d="M 165 325 Q 170 320 175 330 Q 180 340 178 350 Q 175 358 170 354 Q 165 348 165 340 Z"/>
+      <path d="M 200 335 Q 210 330 215 345 Q 218 365 210 375 Q 200 380 195 370 Q 192 355 200 335 Z"/>
+      <ellipse cx="178" cy="360" rx="3" ry="2"/>
+      <ellipse cx="205" cy="385" rx="4" ry="2.5"/>
+      <ellipse cx="190" cy="395" rx="2" ry="1.5"/>
+      <path d="M 220 360 Q 225 358 228 365 L 226 372 Q 223 374 220 370 Z"/>
+      <ellipse cx="155" cy="370" rx="2" ry="1"/>
+      <ellipse cx="240" cy="380" rx="3" ry="2"/>
+      <!-- drip -->
+      <rect x="184" y="395" width="2" height="20" rx="1"/>
+      <rect x="208" y="395" width="2" height="14" rx="1"/>
+    </g>
+
+    <!-- highlight on t-shirt -->
+    <path d="M 170 290 Q 187 295 204 290" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- Author block -->
+  <g>
+    <text x="265" y="430" font-family="Oswald, Inter, sans-serif"
+          font-size="14" font-weight="700" fill="#FFC93A" letter-spacing="3">JEFF</text>
+    <text x="265" y="446" font-family="Oswald, Inter, sans-serif"
+          font-size="14" font-weight="700" fill="#FFC93A" letter-spacing="3">LEONG</text>
+    <line x1="265" y1="455" x2="320" y2="455" stroke="#FFC93A" stroke-width="0.5"/>
+    <text x="265" y="468" font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+          font-size="9" fill="#A9BDC8">梁明耀 著</text>
+  </g>
+
+  <!-- Red tagline strip at bottom -->
+  <rect x="0" y="478" width="375" height="47" fill="url(#red-tag)"/>
+  <text x="187" y="498" text-anchor="middle"
+        font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+        font-size="14" font-weight="800" fill="#FFFFFF" letter-spacing="1">破解 AI 時代的流量困局</text>
+  <text x="187" y="516" text-anchor="middle"
+        font-family="PingFang TC, Noto Sans CJK TC, sans-serif"
+        font-size="11" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">用「信任」擴大個人與企業的長期增長</text>
+</svg>
